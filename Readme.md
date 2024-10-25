@@ -1,12 +1,21 @@
-1. Nome e sobrenome dos membros do projetos e seus respectivos usuários no Github:
-- Gabriel Garcia, Vyktor Felipe e Isaac ([Gabrieelgc2](https://github.com/Gabrieelgc2), [VyNas07](https://github.com/VyNas07/VyNas07), [Isaac-Daniel-A-D](https://github.com/Isaac-Daniel-A-D))
+# Projeto de Jogo
 
-2. Disciplina: Programação Imperativa e Funcional - 2024.2
+## Membros do Projeto
+- **Gabriel Garcia** - [Gabrieelgc2](https://github.com/Gabrieelgc2)
+- **Vyktor Felipe** - [VyNas07](https://github.com/VyNas07/VyNas07)
+- **Isaac** - [Isaac-Daniel-A-D](https://github.com/Isaac-Daniel-A-D)
 
-3. Nome da instituição de ensino: Cesar School
+## Disciplina
+**Programação Imperativa e Funcional - 2024.2**
 
-4. Nome do jogo a ser desenvolvido: 
+## Instituição de Ensino
+**Cesar School**
 
-5. Instruções detalhadas para compilar e executar o jogo: 
+## Nome do Jogo
+*Nome do jogo a ser desenvolvido*
 
-6. Breve descrição do jogo, incluindo as regras e como interagir com ele: 
+## Instruções para Compilar e Executar o Jogo
+*Instruções detalhadas para compilar e executar o jogo*
+
+## Descrição do Jogo
+*Breve descrição do jogo, incluindo as regras e como interagir com ele*
