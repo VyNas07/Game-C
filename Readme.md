@@ -2,7 +2,7 @@
 
 ## Membros do Projeto
 - **Gabriel Garcia** - [Gabrieelgc2](https://github.com/Gabrieelgc2)
-- **Vyktor Felipe** - [VyNas07](https://github.com/VyNas07/VyNas07)
+- **Vyktor Nascimento** - [VyNas07](https://github.com/VyNas07/VyNas07)
 - **Isaac** - [Isaac-Daniel-A-D](https://github.com/Isaac-Daniel-A-D)
 
 ## Disciplina
