@@ -173,6 +173,37 @@ void printMatrizSecundaria(int offset) {
 int pressionar = 0;
 
 void printbar() {
+    /*
+    void printbar() {
+    // Resetar pressionar para 1 caso ultrapasse 10
+    if (pressionar > 10) pressionar = 1;
+
+    // Loop para imprimir a matriz de arte
+    for (int i = 0; i < ALTURA_BAR; i++) {  // Para cada linha (ALTURA_BAR)
+        for (int j = 0; j < LARGURA_BAR; j++) {  // Para cada coluna (LARGURA_BAR)
+
+            // Define a cor de acordo com o valor de pressionar e a faixa de colunas
+            if (pressionar >= 9 && j < 192) { // Colunas de 0 a 192 ficam vermelhas quando pressionado >= 9
+                screenSetColor(RED, DARKGRAY);
+            }
+            else if (pressionar >= 6 && j >= 64 && j < 128) { // Colunas de 64 a 127 ficam amarelas quando pressionado >= 6
+                screenSetColor(YELLOW, DARKGRAY);
+            }
+            else if (pressionar >= 3 && j < 64) { // Colunas de 0 a 63 ficam verdes quando pressionado >= 3
+                screenSetColor(GREEN, DARKGRAY);
+            }
+            else { // Cor padrão
+                screenSetColor(DARKGRAY, DARKGRAY);
+            }
+
+            // Imprime o caractere da matriz
+            putchar(bar[i][j]);
+        }
+        putchar('\n');  // Adiciona uma quebra de linha após cada linha
+    }
+}
+
+    */
     if(pressionar > 10) pressionar = 1;
     if (pressionar == 10) {
         screenSetColor(RED, DARKGRAY);
