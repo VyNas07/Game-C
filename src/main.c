@@ -10,6 +10,8 @@
 #define ALTURA 135  // Altura da matriz principal
 #define LARGURA 2315 // Largura da matriz principal
 #define LARGURA_SEC 405 // Largura da matriz secundária
+#define ALTURA_BAR 3
+#define LARGURA_BAR 192
 
 // A arte ASCII (matriz principal)
 char arte[ALTURA][LARGURA] = {
@@ -148,7 +150,7 @@ char arte[ALTURA][LARGURA] = {
         "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .i                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ",
         "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   .i                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ",
         "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ..                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "};
-char bar[3][192] = {
+char bar[ALTURA_BAR][LARGURA_BAR] = {
 "┌─────────────────────────┬─────────┬──────────────────────────┐",
 "│                         │         │                          │",
 "└─────────────────────────┴─────────┴──────────────────────────┘"};
@@ -168,24 +170,17 @@ void printMatrizSecundaria(int offset) {
         putchar('\n');
     }
 }
-
+int pressionar = 0;
 void printbar() {
     for (int i = 0; i < 3; i++) {
         // Verifica se a linha i existe na matriz de arte
-        if (i < LARGURA) {
-            for (int j = 0; j < 64; j++) {
+            for (int j = 0; j < 192; j++) {
                 // Verifica se a coluna j existe na matriz de arte
-                if (j < LARGURA) {
                     putchar(bar[i][j]);
-                } else {
-                    putchar(' '); // Preenche espaços em branco
-                }
-            }
-        }
+}
         putchar('\n');
     }
 }
-
 int main() {
     screenInit(1);
     keyboardInit();
@@ -225,8 +220,13 @@ int main() {
             }
 
             printMatrizSecundaria(offset);
-            //usleep(20000); // Espera 20 ms para uma animação mais suave
+            usleep(20000); // Espera 20 ms para uma animação mais suave
         }
+      if(tecla == 115){
+        pressionar++;
+        if(pressionar > 9) pressionar = 9;
+        printbar();
+      }  
     }
     
 
