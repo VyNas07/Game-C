@@ -171,16 +171,32 @@ void printMatrizSecundaria(int offset) {
     }
 }
 int pressionar = 0;
+
 void printbar() {
-    for (int i = 0; i < 3; i++) {
-        // Verifica se a linha i existe na matriz de arte
-            for (int j = 0; j < 192; j++) {
-                // Verifica se a coluna j existe na matriz de arte
-                    putchar(bar[i][j]);
-}
-        putchar('\n');
+    if(pressionar > 10) pressionar = 1;
+    if (pressionar == 10) {
+        screenSetColor(RED, DARKGRAY);
+    }
+    else if (pressionar >= 7) {
+        screenSetColor(YELLOW, DARKGRAY);
+    }
+    else if (pressionar >= 4) {
+        screenSetColor(GREEN, DARKGRAY);
+    }
+    else {
+        screenSetColor(DARKGRAY, DARKGRAY);
+    }
+
+    // Loop para imprimir a matriz de arte
+    for (int i = 0; i < ALTURA_BAR; i++) {  // Para cada linha (ALTURA_BAR)
+        for (int j = 0; j < LARGURA_BAR; j++) {  // Para cada coluna (LARGURA_BAR)
+            // Imprime o caractere da matriz
+            putchar(bar[i][j]);
+        }
+        putchar('\n');  // Adiciona uma quebra de linha após cada linha
     }
 }
+
 int main() {
     screenInit(1);
     keyboardInit();
@@ -224,7 +240,6 @@ int main() {
         }
       if(tecla == 115){
         pressionar++;
-        if(pressionar > 9) pressionar = 9;
         printbar();
       }  
     }
