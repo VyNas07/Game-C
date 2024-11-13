@@ -12,6 +12,7 @@
 #define LARGURA_SEC 405 // Largura da matriz secundária
 #define ALTURA_BAR 3
 #define LARGURA_BAR 192
+#define PROGRESS_LINE 64
 
 // A arte ASCII (matriz principal)
 char arte[ALTURA][LARGURA] = {
@@ -154,6 +155,7 @@ char bar[ALTURA_BAR][LARGURA_BAR] = {
 "┌─────────────────────────┬─────────┬──────────────────────────┐",
 "│                         │         │                          │",
 "└─────────────────────────┴─────────┴──────────────────────────┘"};
+
 void printMatrizSecundaria(int offset) {
     for (int i = 0; i < ALTURA; i++) {
         // Verifica se a linha i existe na matriz de arte
@@ -172,51 +174,23 @@ void printMatrizSecundaria(int offset) {
 }
 int pressionar = 0;
 
-void printbar() {
-    /*
-    void printbar() {
-    // Resetar pressionar para 1 caso ultrapasse 10
-    if (pressionar > 10) pressionar = 1;
-
-    // Loop para imprimir a matriz de arte
-    for (int i = 0; i < ALTURA_BAR; i++) {  // Para cada linha (ALTURA_BAR)
-        for (int j = 0; j < LARGURA_BAR; j++) {  // Para cada coluna (LARGURA_BAR)
-
-            // Define a cor de acordo com o valor de pressionar e a faixa de colunas
-            if (pressionar >= 9 && j < 192) { // Colunas de 0 a 192 ficam vermelhas quando pressionado >= 9
-                screenSetColor(RED, DARKGRAY);
+void printbar(int progress) {
+    printf("\n[");  // Move to a new line and start the bar
+    for (int i = 0; i < LARGURA_BAR; i++) {
+        if (i < progress) {
+            if (i < LARGURA_BAR / 3) {
+                printf("\033[0;31m█");  // Cor vermelha
+            } else if (i < 2 * LARGURA_BAR / 3) {
+                printf("\033[0;33m█");  // Cor amarela
+            } else {
+                printf("\033[0;32m█");  // Cor verde
             }
-            else if (pressionar >= 6 && j >= 64 && j < 128) { // Colunas de 64 a 127 ficam amarelas quando pressionado >= 6
-                screenSetColor(YELLOW, DARKGRAY);
-            }
-            else if (pressionar >= 3 && j < 64) { // Colunas de 0 a 63 ficam verdes quando pressionado >= 3
-                screenSetColor(GREEN, DARKGRAY);
-            }
-            else { // Cor padrão
-                screenSetColor(DARKGRAY, DARKGRAY);
-            }
-
-            // Imprime o caractere da matriz
-            putchar(bar[i][j]);
+        } else {
+            printf(" ");  // Espaço vazio na barra
         }
-        putchar('\n');  // Adiciona uma quebra de linha após cada linha
     }
-}
-
-    */
-    if(pressionar > 10) pressionar = 1;
-    if (pressionar == 10) {
-        screenSetColor(RED, DARKGRAY);
-    }
-    else if (pressionar >= 7) {
-        screenSetColor(YELLOW, DARKGRAY);
-    }
-    else if (pressionar >= 4) {
-        screenSetColor(GREEN, DARKGRAY);
-    }
-    else {
-        screenSetColor(DARKGRAY, DARKGRAY);
-    }
+    printf("\033[0m]");  // Reseta a cor e fecha a barra
+    fflush(stdout);
 
     // Loop para imprimir a matriz de arte
     for (int i = 0; i < ALTURA_BAR; i++) {  // Para cada linha (ALTURA_BAR)
@@ -226,7 +200,10 @@ void printbar() {
         }
         putchar('\n');  // Adiciona uma quebra de linha após cada linha
     }
+
 }
+
+   
 
 int main() {
     screenInit(1);
@@ -250,8 +227,9 @@ int main() {
             }
 
             printMatrizSecundaria(offset);
-            //printbar();
-            //usleep(20000); // Espera 20 ms para uma animação mais suave
+            printMatrizSecundaria(offset);
+            printbar(pressionar);
+            usleep(20000); // Espera 20 ms para uma animação mais suave
         }
         if(tecla == 100)
         {
@@ -269,10 +247,15 @@ int main() {
             printMatrizSecundaria(offset);
             usleep(20000); // Espera 20 ms para uma animação mais suave
         }
-      if(tecla == 115){
-        pressionar++;
-        printbar();
-      }  
+      if (tecla == 115) { // Tecla 's'
+            pressionar++;
+            #ifdef _WIN32
+            system("cls");
+            #else
+            system("clear");
+            #endif
+            printbar(pressionar);
+        }
     }
     
 
