@@ -174,13 +174,23 @@ void printMatrizSecundaria(int offset) {
     }
 }
 
+int x = 34;
+int y = 12;
+void posicaoNew(int nextX, int nextY){
+    screenGotoxy(x, y);
+    printf("      ");
+    x = nextX;
+    y = nextY;
+    screenGotoxy(x, y);
+}
 // Função para imprimir a barra de progresso
 void printBar(int pressionar) {
     // Limita o valor de 'pressionar' ao máximo da barra
     if (pressionar > LARGURA_PROGRESSO) {
         pressionar = LARGURA_PROGRESSO;
     }
-
+    posicaoNew(30, 40);
+    screenUpdate();
     // Exibe a primeira linha da barra (borda superior)
     printf("%s\n", bar1);
 
@@ -200,17 +210,13 @@ void printBar(int pressionar) {
         }
     }
     printf("\033[0m│\n");  // Fecha a barra lateral direita
-
     // Exibe a terceira linha da barra (borda inferior)
     printf("%s\n", bar3);
-    
     // Exibe a mensagem abaixo da barra
     printf("Tecla S pressionada %d vezes\n", pressionar);
 
     fflush(stdout);  // Atualiza a saída imediatamente
 }
-
-   
 
 int main() {
     screenInit(1);
@@ -237,7 +243,6 @@ int main() {
 
             printMatrizSecundaria(offset);
             printMatrizSecundaria(offset);
-            printBar(pressionar);
             usleep(20000); // Espera 20 ms para uma animação mais suave
         }
         if(tecla == 100)
@@ -258,11 +263,6 @@ int main() {
         }
       if (tecla == 115) { // Tecla 's'
             pressionar++;
-            #ifdef _WIN32
-            system("cls");
-            #else
-            system("clear");
-            #endif
             printBar(pressionar);
             usleep(50000);  // Pequeno delay para suavizar o preenchimento
         }
