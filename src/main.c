@@ -11,8 +11,9 @@
 #define LARGURA 2315 // Largura da matriz principal
 #define LARGURA_SEC 405 // Largura da matriz secundária
 #define ALTURA_BAR 3
-#define LARGURA_BAR 192
-#define PROGRESS_LINE 64
+#define LARGURA_BAR 179 // O mínimo 
+#define LARGURA_PROGRESSO 58 // Comprimento da barra de progresso, descontando as bordas
+
 
 // A arte ASCII (matriz principal)
 char arte[ALTURA][LARGURA] = {
@@ -151,10 +152,10 @@ char arte[ALTURA][LARGURA] = {
         "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .i                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ",
         "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   .i                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ",
         "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ..                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "};
-char bar[ALTURA_BAR][LARGURA_BAR] = {
-"┌─────────────────────────┬─────────┬──────────────────────────┐",
-"│                         │         │                          │",
-"└─────────────────────────┴─────────┴──────────────────────────┘"};
+// Definição das bordas da barra
+char bar1[LARGURA_BAR + 1] = "┌──────────────────────────────────────────────────────────┐";
+char bar3[LARGURA_BAR + 1] = "└──────────────────────────────────────────────────────────┘";
+
 
 void printMatrizSecundaria(int offset) {
     for (int i = 0; i < ALTURA; i++) {
@@ -172,15 +173,24 @@ void printMatrizSecundaria(int offset) {
         putchar('\n');
     }
 }
-int pressionar = 0;
 
-void printbar(int progress) {
-    printf("\n[");  // Move to a new line and start the bar
-    for (int i = 0; i < LARGURA_BAR; i++) {
-        if (i < progress) {
-            if (i < LARGURA_BAR / 3) {
+// Função para imprimir a barra de progresso
+void printBar(int pressionar) {
+    // Limita o valor de 'pressionar' ao máximo da barra
+    if (pressionar > LARGURA_BAR - 2) {
+        pressionar = LARGURA_BAR - 2;
+    }
+
+    // Exibe a primeira linha da barra (borda superior)
+    printf("%s\n", bar1);
+
+    // Exibe a segunda linha da barra com o progresso preenchido
+    printf("│");
+    for (int i = 0; i < LARGURA_PROGRESSO; i++) {  // Usa LARGURA_PROGRESSO
+        if (i < pressionar) {
+            if (i < LARGURA_PROGRESSO / 3) {
                 printf("\033[0;31m█");  // Cor vermelha
-            } else if (i < 2 * LARGURA_BAR / 3) {
+            } else if (i < 2 * LARGURA_PROGRESSO / 3) {
                 printf("\033[0;33m█");  // Cor amarela
             } else {
                 printf("\033[0;32m█");  // Cor verde
@@ -189,18 +199,12 @@ void printbar(int progress) {
             printf(" ");  // Espaço vazio na barra
         }
     }
-    printf("\033[0m]");  // Reseta a cor e fecha a barra
-    fflush(stdout);
+    printf("\033[0m│\n");  // Fecha a barra lateral direita
 
-    // Loop para imprimir a matriz de arte
-    for (int i = 0; i < ALTURA_BAR; i++) {  // Para cada linha (ALTURA_BAR)
-        for (int j = 0; j < LARGURA_BAR; j++) {  // Para cada coluna (LARGURA_BAR)
-            // Imprime o caractere da matriz
-            putchar(bar[i][j]);
-        }
-        putchar('\n');  // Adiciona uma quebra de linha após cada linha
-    }
+    // Exibe a terceira linha da barra (borda inferior)
+    printf("%s\n", bar3);
 
+    fflush(stdout);  // Atualiza a saída imediatamente
 }
 
    
@@ -208,7 +212,9 @@ void printbar(int progress) {
 int main() {
     screenInit(1);
     keyboardInit();
+    int pressionar = 0;
     int offset = 0;
+
 
     while (1)
     {
@@ -228,7 +234,7 @@ int main() {
 
             printMatrizSecundaria(offset);
             printMatrizSecundaria(offset);
-            printbar(pressionar);
+            printBar(pressionar);
             usleep(20000); // Espera 20 ms para uma animação mais suave
         }
         if(tecla == 100)
@@ -254,7 +260,8 @@ int main() {
             #else
             system("clear");
             #endif
-            printbar(pressionar);
+            printBar(pressionar);
+            usleep(50000);  // Pequeno delay para suavizar o preenchimento
         }
     }
     
