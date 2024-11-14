@@ -177,8 +177,8 @@ void printMatrizSecundaria(int offset) {
 // Função para imprimir a barra de progresso
 void printBar(int pressionar) {
     // Limita o valor de 'pressionar' ao máximo da barra
-    if (pressionar > LARGURA_BAR - 2) {
-        pressionar = LARGURA_BAR - 2;
+    if (pressionar > LARGURA_PROGRESSO) {
+        pressionar = LARGURA_PROGRESSO;
     }
 
     // Exibe a primeira linha da barra (borda superior)
@@ -203,6 +203,9 @@ void printBar(int pressionar) {
 
     // Exibe a terceira linha da barra (borda inferior)
     printf("%s\n", bar3);
+    
+    // Exibe a mensagem abaixo da barra
+    printf("Tecla S pressionada %d vezes\n", pressionar);
 
     fflush(stdout);  // Atualiza a saída imediatamente
 }
