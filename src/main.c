@@ -154,7 +154,7 @@ char arte[ALTURA][LARGURA] = {
         "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ..                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "};
 // Definição das bordas da barra
 char bar1[LARGURA_BAR + 1] = "┌──────────────────────────────────────────────────────────┐";
-char bar3[LARGURA_BAR + 1] = "└──────────────────────────────────────────────────────────┘";
+char bar3[LARGURA_BAR + 1 + 29] = "                             └──────────────────────────────────────────────────────────┘";
 
 
 void printMatrizSecundaria(int offset) {
@@ -173,29 +173,18 @@ void printMatrizSecundaria(int offset) {
         putchar('\n');
     }
 }
-
-int x = 34;
-int y = 12;
-void posicaoNew(int nextX, int nextY){
-    screenGotoxy(x, y);
-    printf("      ");
-    x = nextX;
-    y = nextY;
-    screenGotoxy(x, y);
-}
 // Função para imprimir a barra de progresso
 void printBar(int pressionar) {
+    screenGotoxy(30, 30);
     // Limita o valor de 'pressionar' ao máximo da barra
     if (pressionar > LARGURA_PROGRESSO) {
         pressionar = LARGURA_PROGRESSO;
     }
-    posicaoNew(30, 40);
-    screenUpdate();
     // Exibe a primeira linha da barra (borda superior)
     printf("%s\n", bar1);
 
     // Exibe a segunda linha da barra com o progresso preenchido
-    printf("│");
+    printf("                             │");
     for (int i = 0; i < LARGURA_PROGRESSO; i++) {  // Usa LARGURA_PROGRESSO
         if (i < pressionar) {
             if (i < LARGURA_PROGRESSO / 3) {
@@ -214,7 +203,6 @@ void printBar(int pressionar) {
     printf("%s\n", bar3);
     // Exibe a mensagem abaixo da barra
     printf("Tecla S pressionada %d vezes\n", pressionar);
-
     fflush(stdout);  // Atualiza a saída imediatamente
 }
 
