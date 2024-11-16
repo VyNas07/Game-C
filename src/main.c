@@ -218,7 +218,7 @@ void printBar(int pressionar) {
 
     fflush(stdout);
 }
-   
+
 
 int main() {
     screenInit(1);
