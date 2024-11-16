@@ -11,7 +11,7 @@
 #define LARGURA 2315 // Largura da matriz principal
 #define LARGURA_SEC 405 // Largura da matriz secundária
 #define ALTURA_BAR 3
-#define LARGURA_BAR 179 // O mínimo 
+#define LARGURA_BAR 179 // O mínimo é 179
 #define LARGURA_PROGRESSO 58 // Comprimento da barra de progresso, descontando as bordas
 
 
@@ -174,42 +174,50 @@ void printMatrizSecundaria(int offset) {
     }
 }
 
-// Função para imprimir a barra de progresso
 void printBar(int pressionar) {
-    // Limita o valor de 'pressionar' ao máximo da barra
     if (pressionar > LARGURA_PROGRESSO) {
         pressionar = LARGURA_PROGRESSO;
     }
 
-    // Exibe a primeira linha da barra (borda superior)
-    printf("%s\n", bar1);
+    int barraPosY = ALTURA + 2;
 
-    // Exibe a segunda linha da barra com o progresso preenchido
-    printf("│");
-    for (int i = 0; i < LARGURA_PROGRESSO; i++) {  // Usa LARGURA_PROGRESSO
-        if (i < pressionar) {
-            if (i < LARGURA_PROGRESSO / 3) {
-                printf("\033[0;31m█");  // Cor vermelha
-            } else if (i < 2 * LARGURA_PROGRESSO / 3) {
-                printf("\033[0;33m█");  // Cor amarela
-            } else {
-                printf("\033[0;32m█");  // Cor verde
-            }
-        } else {
-            printf(" ");  // Espaço vazio na barra
+    // Limpa a área da barra
+    for (int i = 0; i < 4; i++) {
+        screenGotoxy((LARGURA_SEC - LARGURA_BAR) / 2, barraPosY + i);
+        for (int j = 0; j < LARGURA_BAR; j++) {
+            putchar(' ');  // Garante a limpeza completa
         }
     }
-    printf("\033[0m│\n");  // Fecha a barra lateral direita
 
-    // Exibe a terceira linha da barra (borda inferior)
+    // Exibe a barra atualizada
+    screenGotoxy((LARGURA_SEC - LARGURA_BAR) / 2, barraPosY);
+    printf("%s\n", bar1);
+
+    screenGotoxy((LARGURA_SEC - LARGURA_BAR) / 2, barraPosY + 1);
+    printf("│");
+    for (int i = 0; i < LARGURA_PROGRESSO; i++) {
+        if (i < pressionar) {
+            if (i < LARGURA_PROGRESSO / 3) {
+                printf("\033[0;31m█");  // Vermelho
+            } else if (i < 2 * LARGURA_PROGRESSO / 3) {
+                printf("\033[0;33m█");  // Amarelo
+            } else {
+                printf("\033[0;32m█");  // Verde
+            }
+        } else {
+            printf(" ");  // Espaço vazio
+        }
+    }
+    printf("\033[0m│\n");
+
+    screenGotoxy((LARGURA_SEC - LARGURA_BAR) / 2, barraPosY + 2);
     printf("%s\n", bar3);
-    
-    // Exibe a mensagem abaixo da barra
+
+    screenGotoxy((LARGURA_SEC - LARGURA_BAR) / 2, barraPosY + 3);
     printf("Tecla S pressionada %d vezes\n", pressionar);
 
-    fflush(stdout);  // Atualiza a saída imediatamente
+    fflush(stdout);
 }
-
    
 
 int main() {
@@ -236,8 +244,6 @@ int main() {
             }
 
             printMatrizSecundaria(offset);
-            printMatrizSecundaria(offset);
-            printBar(pressionar);
             usleep(20000); // Espera 20 ms para uma animação mais suave
         }
         if(tecla == 100)
@@ -258,11 +264,6 @@ int main() {
         }
       if (tecla == 115) { // Tecla 's'
             pressionar++;
-            #ifdef _WIN32
-            system("cls");
-            #else
-            system("clear");
-            #endif
             printBar(pressionar);
             usleep(50000);  // Pequeno delay para suavizar o preenchimento
         }
