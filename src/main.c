@@ -174,6 +174,11 @@ void printMatrizSecundaria(int offset) {
     }
 }
 
+void libertaCorrente() {
+    // Jogador sai da corrente
+    printf("\nA barra está completa! Iniciando outra função...\n");
+}
+
 void printBar(int pressionar) {
     // Limita o valor de 'pressionar' ao máximo da barra de progresso
     if (pressionar > LARGURA_PROGRESSO) {
@@ -216,6 +221,11 @@ void printBar(int pressionar) {
     printf("Tecla S pressionada %d vezes\n", pressionar);
 
     fflush(stdout);  // Atualiza a saída imediatamente
+
+    // Verifique se a barra está completa e chame a outra animação
+    if (pressionar == LARGURA_PROGRESSO) {
+        libertaCorrente();
+    }
 }
 
 
