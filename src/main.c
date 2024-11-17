@@ -274,5 +274,17 @@ int main() {
         }
     }
 
+    /*for (int offset = 0; offset <= LARGURA - LARGURA_SEC; offset++) {
+        // Limpar o terminal de forma compatível
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+        
+        printMatrizSecundaria(offset);
+        usleep(20000); // Espera 20 ms para uma animação mais suave
+    }*/
+
     return 0;
 }
