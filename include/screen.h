@@ -50,7 +50,7 @@
 
 #define MINX           1      // min screen horizontal pos
 #define MINY           1      // min screen vertical pos
-#define MAXX           405     // max screen horizontal pos
+#define MAXX           135     // max screen horizontal pos
 #define MAXY           135     // max screen vertical pos
 
 /**
