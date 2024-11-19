@@ -69,5 +69,5 @@ Uma animação ou indicador adicional pode fornecer feedback imediato de sucesso
 
 ## Jogabilidade
 Controles Básicos:
-A: Olha para a esquerda.
-D: Olha para a direita.
+- A: Olha para a esquerda.
+- D: Olha para a direita.
