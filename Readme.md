@@ -50,7 +50,7 @@ Isso garante que o jogador tenha feedback visual constante dos desafios e indica
 ## 1. Detecção de Objetos no Campo de Visão:
 
 Um sistema de detecção verifica se um objeto interativo (ex.: uma alavanca) está no campo de visão, permitindo que o jogador o selecione.
-Quando o objeto está visível na matriz de visão, um botão específico aparece, sinalizando a possibilidade de interação.
+Quando o objeto está visível na matriz de visão, uma barra verde aparece, sinalizando a possibilidade de interação.
 Ao interagir com um objeto, o jogo processa o evento (como puxar uma alavanca ou abrir uma porta) e atualiza a matriz principal, alterando o ambiente e desbloqueando novas áreas ou desafios.
 
 ## 2. Atualização do Ambiente e Novas Interações:
@@ -66,3 +66,8 @@ O QTE pode ser projetado para medir precisão (pressionar no momento exato) ou v
 ## 2. Feedback Visual e HUD:
 As barras de QTE são exibidas na parte inferior da tela e estão fora das matrizes de visão e ambiente, proporcionando um feedback imediato e claro para o jogador sem interferir na exploração.
 Uma animação ou indicador adicional pode fornecer feedback imediato de sucesso ou falha, promovendo a sensação de urgência e resposta rápida.
+
+## Jogabilidade
+Controles Básicos:
+A: Olha para a esquerda.
+D: Olha para a direita.
