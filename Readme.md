@@ -73,7 +73,7 @@ Controles Básicos:
 - D: Olha para a direita.
 
 ## Barra de Progresso para Desbloqueio
-- No jogo, existe uma barra de progresso dinâmica que é ativada em determinada situações, após interagir com a animação de puxar a corrente para prosseguir é necessário clicar a tecla espaço. Essa barra não está diretamente ligada à barra verde de interação, mas funciona como uma mecânica de Quick Time Event (QTE), onde o jogador deve pressionar a tecla Espaço repetidamente para preenchê-la e concluir a ação.
+- No jogo, existe uma barra de progresso dinâmica que é ativada em determinada situação, após interagir com a animação de puxar a corrente para prosseguir é necessário clicar a tecla espaço. Essa barra não está diretamente ligada à barra verde de interação, mas funciona como uma mecânica de Quick Time Event (QTE), onde o jogador deve pressionar a tecla Espaço repetidamente para preenchê-la e concluir a ação.
 - Funcionamento da Barra de Progresso
 Início do Desafio:
 
@@ -81,7 +81,7 @@ Quando a barra aparece na tela, ela começa na cor vermelho, indicando o estado 
 Progresso Visual:
 
 Conforme o jogador pressiona Espaço, a barra progride e muda de cor:
-Vermelho: Inicial, fácil.
-Amarelo: Progresso médio.
-Verde: Próximo da conclusão.
+- Vermelho: Inicial, fácil.
+- Amarelo: Progresso médio.
+- Verde: Próximo da conclusão.
 A barra precisa atingir o estado verde completo para desbloquear o objetivo
