@@ -12,7 +12,7 @@
 **Cesar School**
 
 ## Nome do Jogo
-*Nome do jogo a ser desenvolvido*
+*ASCII Dungeon*
 
 ## Instruções para Compilar e Executar o Jogo
 *Instruções detalhadas para compilar e executar o jogo*
