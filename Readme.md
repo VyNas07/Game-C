@@ -1,4 +1,4 @@
-# Projeto de Jogo
+# ASCII Dungeon
 
 ## Membros do Projeto
 - **Gabriel Garcia** - [Gabrieelgc2](https://github.com/Gabrieelgc2)
